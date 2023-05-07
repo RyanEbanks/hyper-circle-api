@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const reaction = require('./Reaction');
 
 // Schema to create Post model
 const thoughtSchema = new Schema({
@@ -11,7 +12,14 @@ const thoughtSchema = new Schema({
             ref: 'Reaction',
         },
 ]
-});
+},
+{
+  toJSON: {
+      virtuals: true,
+  },
+  id: false,
+}
+);
 
 // Create a virtual property `reactionCount` that retrieves the length of the thought's reactions array
 thoughtSchema
