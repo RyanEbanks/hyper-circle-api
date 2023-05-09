@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
 // Schema to create Post model
 const reactionSchema = new Schema({
@@ -9,23 +9,12 @@ const reactionSchema = new Schema({
 }, 
 {
   toJSON: {
-      virtuals: true,
+      getters: true,
   },
   id: false,
 }
 );
 
-// Create a virtual property `timestamp` that formats the timestamp on the query.
-// reactionSchema
-reactionSchema
-.virtual('timestamp')
-// Getter
-.get(function () {
-  return this.reactions.length;
-});
-
-// Initialize our Application model
-const Reaction = model('reaction', reactionSchema);
 
 
-module.exports = Reaction;
+module.exports = reactionSchema;

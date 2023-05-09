@@ -9,8 +9,8 @@ module.exports = {
     },
 
     //GET single thought
-    getThoughts(req, res) {
-        Thought.findOne({ _id: req.params.courseId })
+    getSingleThought(req, res) {
+        Thought.findOne({ _id: req.params.thoughtId })
         .select('-__V')
         .then((thought) =>
         !thought
@@ -21,7 +21,7 @@ module.exports = {
     },
 
     // Create a thought
-  createUser(req, res) {
+  createThought(req, res) {
     Thought.create(req.body)
       .then((thought) => res.json(thought))
       .catch((err) => {
@@ -31,9 +31,9 @@ module.exports = {
   },
 
   // Update a thought
-  updateUser(req, res) {
+  updateThought(req, res) {
     Thought.findOneAndUpdate(
-      { _id: req.params.courseId },
+      { _id: req.params.thoughtId },
       { $set: req.body },
       { runValidators: true, new: true }
     )
@@ -46,8 +46,8 @@ module.exports = {
   },
 
   // Delete a thought
-  deleteUser(req, res) {
-    Thought.findOneAndDelete({ _id: req.params.courseId })
+  deleteThought(req, res) {
+    Thought.findOneAndDelete({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought with that ID' })

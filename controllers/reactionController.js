@@ -2,7 +2,7 @@ const { Reaction } = require('../models');
 
 module.exports = {
     // Create a reaction
-  createUser(req, res) {
+  createReaction(req, res) {
     Reaction.create(req.body)
       .then((reaction) => res.json(reaction))
       .catch((err) => {
@@ -12,8 +12,8 @@ module.exports = {
   },
 
   // Delete a reaction
-  deleteUser(req, res) {
-    Reaction.findOneAndDelete({ _id: req.params.courseId })
+  deleteReaction(req, res) {
+    Reaction.findOneAndDelete({ _id: req.params.reactionId })
       .then((reaction) =>
         !reaction
           ? res.status(404).json({ message: 'No course with that ID' })

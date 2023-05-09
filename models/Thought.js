@@ -1,17 +1,13 @@
 const { Schema, model } = require('mongoose');
-const reaction = require('./Reaction');
+const reactionSchema = require('./Reaction');
 
 // Schema to create Post model
 const thoughtSchema = new Schema({
     thoughtText: { type: String, required: true, minlength: 1, maxlength: 280 },
     createdAt: { type: Date,  default: Date.now },
     username: { type: String, required: true },
-    reactions: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Reaction',
-        },
-]
+    //every thought has a reaction but reactions dont exist outside of thoughts
+    reactions: [reactionSchema]
 },
 {
   toJSON: {
