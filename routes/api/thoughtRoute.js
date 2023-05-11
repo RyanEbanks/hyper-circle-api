@@ -8,7 +8,10 @@ const {
 } = require('../../controllers/thoughtController')
 
 // /api/thoughts
-router.route('/').get(getThoughts).get(getSingleThought).post(createThought).put(updateThought).delete(deleteThought);
+router.route('/').get(getThoughts).post(createThought);
+
+// These utilize ID parameters in order to complete the operation
+router.route('/:thoughtId').get(getSingleThought).put(updateThought).delete(deleteThought);
 
 
 module.exports = router;

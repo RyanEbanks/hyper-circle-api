@@ -1,4 +1,4 @@
-const { Reaction } = require('../models');
+const { Reaction } = require('../models/Reaction');
 
 const reactions = [
     {
@@ -22,5 +22,23 @@ const reactions = [
         'username': 'birdboy48', 
     },
 ];
+
+
+const seedReactions = async () => {
+  try {
+    await reactionSchema.insertMany(
+      reactions.map(reaction => ({
+        ...reaction,
+        reactionId: Types.ObjectId(),
+        createdAt: Date.now(),
+      })),
+    );
+    console.log('Reactions seeded successfully');
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+module.exports = seedReactions;
 
 

@@ -7,10 +7,12 @@ const thoughtSchema = new Schema({
     createdAt: { type: Date,  default: Date.now },
     username: { type: String, required: true },
     //every thought has a reaction but reactions dont exist outside of thoughts
+    //being used as a subdocument schema for the reactions field
     reactions: [reactionSchema]
 },
 {
   toJSON: {
+      getters: true,
       virtuals: true,
   },
   id: false,
