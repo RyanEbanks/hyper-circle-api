@@ -21,13 +21,13 @@ const thoughtSchema = new Schema({
 
 // Create a virtual property `reactionCount` that retrieves the length of the thought's reactions array
 thoughtSchema
-  .virtual('reaction')
+  .virtual('reactionCount')
   // Getter
   .get(function () {
     return this.reactions.length;
   });
 
 // Initialize our Application model
-const User = model('thoughts', thoughtSchema);
+const Thought = model('thought', thoughtSchema);
 
-module.exports = User;
+module.exports = Thought;

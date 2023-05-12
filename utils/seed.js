@@ -1,8 +1,6 @@
 const connection = require('../config/connection');
-const { User, Thought, Reaction } = require('../models');
-const seedUsers = require('../utils/user');
-const seedThoughts = require('../utils/thought');
-const seedReactions = require('../utils/reaction');
+const { User, Thought } = require('../models');
+const { userData, thoughtData, reactionData } = require('./data');
 
 connection.on('error', (err) => err);
 
@@ -12,20 +10,23 @@ connection.once('open', async () => {
   // Drop existing data
   await User.deleteMany({});
   await Thought.deleteMany({});
-  await Reaction.collection.deleteMany({});
-  console.log('deleted all');
+  
+  console.log('deleted user, thought, and reaction data!');
 
-  // Create users
-  await seedUsers();
+  // Create user and thought
+  const userDB = await User.insertMany(userData);
+  const thoughtDB = await Thought.insertMany(thoughtData);
+  console.log('users and thoughts seeded');
 
-  // Create thoughts
-  await seedThoughts();
+  // Insert Thoughts into the users thought array
+  for (let i = 0; i < thoughtDB.length; i++) {
+    const thought = thoughtDB[i];
+    const user = userDB.find((user) => user.username === thought.username);
+    user.thoughts.push(thought);
+    await user.save();
+  }
 
-  // Create reactions
-  await seedReactions();
 
-  console.log('users seeded');
-  console.log('thoughts seeded');
   console.log('reactions seeded');
   process.exit(0);
 });

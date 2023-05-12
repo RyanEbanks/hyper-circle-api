@@ -1,5 +1,6 @@
 const { Schema, Types } = require('mongoose');
 
+
 // Schema to create Post model
 const reactionSchema = new Schema({
     reactionId: { type: Schema.Types.ObjectId, default: () => new Types.ObjectId() },
@@ -12,8 +13,7 @@ const reactionSchema = new Schema({
       getters: true,
   },
   id: false,
-}
-);
+});
 
 
 
