@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Video Link
-[Click Here!](https://www.youtube.com/watch?v=jMtPag3dg84)
+[Click Here!](https://youtu.be/Ajdqid4uCw0)
 
 ## Description
 Hyper Circle is a social network api for a social network web application where users can share their thoughts, react to friends thoughts, and create a friend list. This project utilizes express.js for the server and mongodb for the database.
